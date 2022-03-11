@@ -1,0 +1,40 @@
+.selected
+  background-color: #2AAB56 !important
+  color: white !important
+
+.selected:after
+  content: ' '
+  background-color: #2AAB56
+  width: 28px
+  height: 28px
+  transform: rotate(45deg)
+  position: absolute
+  right: -14px
+  top: 6px
+
+.right-arrow .selected:after
+  right: -14px
+
+.left-arrow .selected:after
+  left: -14px
+
+.list-item-label
+  padding-left: 2px
+
+.arrow
+  position: absolute
+  transform: rotate(-10deg)
+  right: 38px
+  width: 150px
+  top: -25px
+
+.btn-delete
+  line-height: 0
+  padding: 0
+  margin-top: -3px
+  margin-left: 15px
+  box-shadow: none
+  opacity: 0
+
+.list-group-item-action:hover .btn-delete
+  opacity: 1

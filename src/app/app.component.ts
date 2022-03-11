@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import {ListService} from './components/list/list.service';
+import {DataMock} from './mocks/data.mock';
+import {ListControlInterface} from './models/listControl.interface';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +9,19 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent {
-  title = 'robin-test-task';
+
+  listControl: ListControlInterface = {
+    header: 'Regions',
+    items: this.listService.data,
+    logo: '',
+    showSwitcher: true,
+    showAdd: true,
+    showDelete: true,
+    enableSelect: true,
+    dark: false,
+  }
+
+  constructor(private listService: ListService, private dataMock: DataMock) {
+    this.listService.setData(dataMock.getMockData());
+  }
 }
