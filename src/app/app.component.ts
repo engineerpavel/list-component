@@ -19,6 +19,8 @@ export class AppComponent {
     showDelete: true,
     enableSelect: true,
     dark: false,
+    emptyMessage: '',
+    selectorStyle: ''
   }
 
   constructor(private listService: ListService, private dataMock: DataMock) {

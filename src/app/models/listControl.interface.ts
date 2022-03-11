@@ -12,7 +12,7 @@ export interface ListControlInterface {
   showDelete: boolean;
   enableSelect: boolean;
   dark: boolean;
-  emptyMessage?: string;
-  selectorStyle?: 'right-arrow' | '';
+  emptyMessage: string;
+  selectorStyle: 'right-arrow' | '';
   clearSelection?: EventEmitter<void>;
 }

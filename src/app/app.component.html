@@ -1,7 +1,7 @@
 <div class="list-app">
   <div class="header">
     <div class="title">
-      Test task for Aplana|Robin
+      Test task for Aplana / Robin
     </div>
     <div class="subtitle">
       Дан некий компонент списка. Нужно понять как он устроен, создать новое приложение на ангуляре и встроить туда этот
@@ -9,7 +9,19 @@
     </div>
   </div>
   <div class="main">
-    <app-list [header]="listControl.header" [items]="listControl.items" [logo]="listControl.logo"></app-list>
+    <app-list [header]="listControl.header"
+              [items]="listControl.items"
+              [logo]="listControl.logo"
+              [showAdd]="listControl.showAdd"
+              [showSwitcher]="listControl.showSwitcher"
+              [showDelete]="listControl.showDelete"
+              [enableSelect]="listControl.enableSelect"
+              [dark]="listControl.dark"
+              [emptyMessage]="listControl.emptyMessage"
+              [selectorStyle]="listControl.selectorStyle"
+              [clearSelection]="listControl.clearSelection"
+    >
+    </app-list>
   </div>
   <footer>
     I thank <a href="https://tilda.cc">tilda.cc</a> for providing free icons for the site
