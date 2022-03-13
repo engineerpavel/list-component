@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable, isObservable } from 'rxjs';
 import { IIdName } from 'src/app/models/idname.model';
@@ -6,7 +6,8 @@ import { IIdName } from 'src/app/models/idname.model';
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
-  styleUrls: ['./list.component.sass']
+  styleUrls: ['./list.component.sass'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListComponent implements OnInit {
 
@@ -26,6 +27,10 @@ export class ListComponent implements OnInit {
   @Output() selected = new EventEmitter<IIdName>();
   @Output() addClicked = new EventEmitter();
   @Output() deleteItemClicked = new EventEmitter<IIdName>();
+
+  get isAsc(): boolean {
+    return this.sortAsc === 1;
+  }
 
 
   itemsList: IIdName[] = [];
@@ -91,7 +96,7 @@ export class ListComponent implements OnInit {
     return false;
   }
 
-  switcherClicked = (e: MouseEvent, item: IIdName, state: boolean): void => {
+  switcherClicked = (e: MouseEvent, item: IIdName): void => {
     e.stopPropagation();
   }
 }

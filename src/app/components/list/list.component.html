@@ -2,13 +2,14 @@
   <div class="card-header" [ngClass]="{ dark: dark }">
     <div class="row">
       <div class="col col-10">
-        <h3 class="d-flex align-items-center"><img alt="logo" *ngIf="logo" src="/assets/images/{{logo}}.png" height="50" class="px-3"/>
+        <h3 class="d-flex align-items-center">
+          <i *ngIf="logo" nz-icon nzType="{{logo}}" nzTheme="outline"></i>
           {{ header }}
         </h3>
       </div>
       <div *ngIf="showAdd" class="col col-2">
         <button (click)="add()" type="button" class="btn float-end">
-          <img alt="add button" src="/assets/images/add.svg" height="50"/>
+          <i nz-icon nzType="file-add" nzTheme="fill"></i>
         </button>
       </div>
     </div>
@@ -23,30 +24,52 @@
         </ul>
     </div> -->
   </div>
-  <div class="card-body" [ngClass]="{ dark: dark }">
-    <div *ngIf="itemsList.length" class="input-group mb-3">
-      <input type="text" class="form-control" placeholder="Поиск" aria-describedby="button-addon"
-             [formControl]="filterControl">
-      <button type="button" class="btn btn-light" (click)="sort()"><img src="/assets/images/sort.png"/></button>
+  <div [ngClass]="{ dark: dark }">
+    <div *ngIf="itemsList.length">
+      <input type="text" aria-describedby="button-addon"
+             placeholder="Поиск"
+             nz-input
+             [formControl]="filterControl"/>
+      <button class="sort-button" type="button" (click)="sort()">
+        <i nz-icon nzType="{{isAsc ? 'sort-ascending' : 'sort-descending'}}" nzTheme="outline"></i>
+      </button>
     </div>
     <div *ngIf="!itemsList.length && showAdd" class="input-group mb-3">
       <p class="text-muted pt-4">{{ emptyMessage }}</p>
-      <img class="arrow" src="/assets/images/arrow-add-new.png" />
+      <img src="/assets/images/arrow-add-new.png" />
     </div>
   </div>
   <div class="list-group list-group-flush" [ngClass]="selectorStyle">
-    <a *ngFor="let item of filteredItems" (click)="selectedHandler(item)" href="#"
+    <nz-list>
+      <nz-list-item *ngFor="let item of filteredItems">
+        <nz-list-item-meta nzDescription="{{item.name}}">
+        </nz-list-item-meta>
+        <ul nz-list-item-actions>
+          <nz-list-item-action *ngIf="showSwitcher">
+            <label
+              nz-checkbox
+              id="flexSwitchCheckChecked"
+              [nzChecked]="item.checked"
+              (click)="switcherClicked($event, item)"
+            ></label>
+          </nz-list-item-action>
+          <nz-list-item-action *ngIf="showDelete">
+            <button (click)="deleteItem(item)" nz-button nzType="primary" [nzSize]="'small'" nzShape="circle">
+              <i nz-icon nzType="delete" nzTheme="outline"></i>
+            </button>
+          </nz-list-item-action>
+        </ul>
+      </nz-list-item>
+    </nz-list>
+
+    <!--<a *ngFor="let item of filteredItems" (click)="selectedHandler(item)" href="#"
        [ngClass]="{selected: item.id === selectedItemId, dark: dark}"
-       class="list-group-item list-group-item-action" aria-current="true">
+       aria-current="true">
       <div class="d-flex w-100 justify-content-between list-item-label">
-        {{ item.name }}
-        <div *ngIf="showSwitcher" class="form-check form-switch">
-          <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked #switcher (click)="switcherClicked($event, item, switcher.checked)">
-        </div>
-        <div *ngIf="showDelete" (click)="deleteItem(item)">
-          <button type="button" class="btn btn-delete"><img src="/assets/images/delete.png"/></button>
+        <div >
+          <button type="button" class="btn btn-delete"></button>
         </div>
       </div>
-    </a>
+    </a>-->
   </div>
 </div>

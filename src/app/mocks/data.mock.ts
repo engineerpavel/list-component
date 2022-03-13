@@ -10,31 +10,38 @@ export class DataMock {
     return [
       {
         id: "3",
-        name: "Belgorod region"
+        name: "Belgorod region",
+        checked: true
       },
       {
         id: "4",
-        name: "Bryansk region"
+        name: "Bryansk region",
+        checked: true
       },
       {
         id: "5",
-        name: "Vladimir region"
+        name: "Vladimir region",
+        checked: true
       },
       {
         id: "6",
-        name: "Voronezh region"
+        name: "Voronezh region",
+        checked: true
       },
       {
         id: "7",
-        name: "Ivanovo region"
+        name: "Ivanovo region",
+        checked: true
       },
       {
         id: "8",
-        name: "Kaluga region"
+        name: "Kaluga region",
+        checked: true
       },
       {
         id: "9",
-        name: "Kostroma region"
+        name: "Kostroma region",
+        checked: true
       }
     ];
   }
