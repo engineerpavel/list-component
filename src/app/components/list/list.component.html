@@ -1,17 +1,13 @@
 <div class="card" [ngClass]="{ dark: dark }">
   <div class="card-header" [ngClass]="{ dark: dark }">
-    <div class="row">
-      <div class="col col-10">
-        <h3 class="d-flex align-items-center">
-          <i *ngIf="logo" nz-icon nzType="{{logo}}" nzTheme="outline"></i>
-          {{ header }}
-        </h3>
-      </div>
-      <div *ngIf="showAdd" class="col col-2">
-        <button (click)="add()" type="button" class="btn float-end">
-          <i nz-icon nzType="file-add" nzTheme="fill"></i>
-        </button>
-      </div>
+    <h3>
+      <i *ngIf="logo" nz-icon nzType="{{logo}}" nzTheme="outline"></i>
+      {{ header }}
+    </h3>
+    <div *ngIf="showAdd">
+      <button (click)="add()" type="button" class="btn float-end">
+        <i nz-icon nzType="file-add" nzTheme="fill"></i>
+      </button>
     </div>
     <!-- <div class="dropdown">
         <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -25,11 +21,12 @@
     </div> -->
   </div>
   <div [ngClass]="{ dark: dark }">
-    <div *ngIf="itemsList.length">
+    <div class="input-row" *ngIf="itemsList.length">
       <input type="text" aria-describedby="button-addon"
              placeholder="Поиск"
              nz-input
-             [formControl]="filterControl"/>
+             [formControl]="filterControl"
+             />
       <button class="sort-button" type="button" (click)="sort()">
         <i nz-icon nzType="{{isAsc ? 'sort-ascending' : 'sort-descending'}}" nzTheme="outline"></i>
       </button>

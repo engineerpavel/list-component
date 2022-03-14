@@ -8,19 +8,21 @@
       компонент, чтобы он работал.
     </div>
   </div>
-  <div class="main">
-    <app-list [header]="listControl.header"
-              [items]="listControl.items"
-              [logo]="listControl.logo"
-              [showAdd]="listControl.showAdd"
-              [showSwitcher]="listControl.showSwitcher"
-              [showDelete]="listControl.showDelete"
-              [enableSelect]="listControl.enableSelect"
-              [dark]="listControl.dark"
-              [emptyMessage]="listControl.emptyMessage"
-              [selectorStyle]="listControl.selectorStyle"
-              [clearSelection]="listControl.clearSelection"
-    >
-    </app-list>
+  <app-list class="main" [header]="listControl.header"
+            [items]="listControl.items"
+            [logo]="listControl.logo"
+            [showAdd]="listControl.showAdd"
+            [showSwitcher]="listControl.showSwitcher"
+            [showDelete]="listControl.showDelete"
+            [enableSelect]="listControl.enableSelect"
+            [dark]="listControl.dark"
+            [emptyMessage]="listControl.emptyMessage"
+            [selectorStyle]="listControl.selectorStyle"
+            [clearSelection]="listControl.clearSelection"
+
+            (addClicked)="addItem()"
+            (selected)="selectItem($event)"
+            (deleteItemClicked)="deleteItem($event)"
+  >
+  </app-list>
   </div>
-</div>

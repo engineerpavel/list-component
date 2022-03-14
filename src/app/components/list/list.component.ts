@@ -1,5 +1,12 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import { FormControl } from '@angular/forms';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter, forwardRef,
+  Input,
+  OnInit,
+  Output
+} from '@angular/core';
+import {FormControl, FormGroup, NG_VALUE_ACCESSOR} from '@angular/forms';
 import { Observable, isObservable } from 'rxjs';
 import { IIdName } from 'src/app/models/idname.model';
 
@@ -32,7 +39,6 @@ export class ListComponent implements OnInit {
     return this.sortAsc === 1;
   }
 
-
   itemsList: IIdName[] = [];
 
   filteredItems: IIdName[] = [];
@@ -40,8 +46,6 @@ export class ListComponent implements OnInit {
   sortAsc = 1;
 
   selectedItemId: string | undefined;
-
-  constructor() { }
 
   ngOnInit(): void {
     if (this.items) {
@@ -91,9 +95,9 @@ export class ListComponent implements OnInit {
     this.addClicked.emit();
   }
 
-  deleteItem = (item: IIdName): boolean => {
-    this.deleteItemClicked.emit(item);
-    return false;
+  deleteItem = (item: IIdName): void => {
+    this.filteredItems = this.filteredItems.filter((i) => i !== item);
+    this.itemsList = this.itemsList.filter((i) => i !== item);
   }
 
   switcherClicked = (e: MouseEvent, item: IIdName): void => {
