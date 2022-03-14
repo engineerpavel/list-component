@@ -96,8 +96,7 @@ export class ListComponent implements OnInit {
   }
 
   deleteItem = (item: IIdName): void => {
-    this.filteredItems = this.filteredItems.filter((i) => i !== item);
-    this.itemsList = this.itemsList.filter((i) => i !== item);
+    this.deleteItemClicked.emit(item);
   }
 
   switcherClicked = (e: MouseEvent, item: IIdName): void => {

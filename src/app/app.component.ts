@@ -1,8 +1,7 @@
-import {ChangeDetectionStrategy, Component, ElementRef, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewChild} from '@angular/core';
 import {ListService} from './components/list/list.service';
 import {DataMock} from './mocks/data.mock';
 import {ListControlInterface} from './models/listControl.interface';
-import {FormControl, FormGroup} from '@angular/forms';
 import {IIdName} from './models/idname.model';
 import {ListComponent} from './components/list/list.component';
 
@@ -10,7 +9,7 @@ import {ListComponent} from './components/list/list.component';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent {
 
@@ -26,13 +25,12 @@ export class AppComponent {
     emptyMessage: '',
     selectorStyle: ''
   }
-
-  constructor(private listService: ListService, private dataMock: DataMock) {
-    this.listService.setData(dataMock.getMockData());
-  }
-
   @ViewChild(ListComponent)
   private listComponent: ListComponent | undefined;
+
+  constructor(private listService: ListService, private dataMock: DataMock, private cd: ChangeDetectorRef) {
+    this.listService.setData(dataMock.getMockData());
+  }
 
   addItem() {
     let itemsList = this.listComponent?.itemsList;
@@ -50,6 +48,9 @@ export class AppComponent {
   }
 
   deleteItem(item: IIdName) {
-
+    if (this.listComponent) {
+      const filteredItems = this.listComponent.itemsList.filter((listItem) => listItem.id !== item.id)
+      this.listService.setData(filteredItems);
+    }
   }
 }
