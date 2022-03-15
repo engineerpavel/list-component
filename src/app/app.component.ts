@@ -1,9 +1,11 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, Component, ViewChild} from '@angular/core';
 import {ListService} from './components/list/list.service';
 import {DataMock} from './mocks/data.mock';
 import {ListControlInterface} from './models/listControl.interface';
 import {IIdName} from './models/idname.model';
 import {ListComponent} from './components/list/list.component';
+import { v4 as uuidv4 } from 'uuid';
+import {map, tap} from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -28,19 +30,22 @@ export class AppComponent {
   @ViewChild(ListComponent)
   private listComponent: ListComponent | undefined;
 
-  constructor(private listService: ListService, private dataMock: DataMock, private cd: ChangeDetectorRef) {
+  constructor(private listService: ListService, private dataMock: DataMock) {
     this.listService.setData(dataMock.getMockData());
   }
 
   addItem() {
-    let itemsList = this.listComponent?.itemsList;
-    if (itemsList) {
+    if (this.listComponent) {
       const listItem = new IIdName(
-        this.listComponent?.filterControl.value.concat(itemsList.length),
+        uuidv4(),
         this.listComponent?.filterControl.value, false
       );
+      const itemsList = this.listComponent.itemsList
       itemsList.push(listItem);
+      this.listService.setData(itemsList);
     }
+
+
   }
 
   selectItem(item: IIdName) {
