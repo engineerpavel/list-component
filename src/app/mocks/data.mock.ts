@@ -26,7 +26,7 @@ export class DataMock {
       {
         id: "6",
         name: "Voronezh region",
-        checked: true
+        checked: false
       },
       {
         id: "7",
@@ -36,7 +36,7 @@ export class DataMock {
       {
         id: "8",
         name: "Kaluga region",
-        checked: true
+        checked: false
       },
       {
         id: "9",

@@ -73,12 +73,31 @@ export class ListComponent implements OnInit {
   }
 
   applySort = (): void => {
-    this.filteredItems.sort((a, b) => a.name > b.name ? this.sortAsc : -this.sortAsc);
+    this.filteredItems.sort((a, b) => {
+      const checked = this.checkedSort(a, b);
+      return checked === 0 ? this.alphabetSort(a, b) : checked;
+    });
   }
 
   sort = (): void => {
     this.sortAsc = -this.sortAsc;
     this.applySort();
+  }
+
+  alphabetSort(a:IIdName, b: IIdName): number {
+    return (a.name > b.name) ? this.sortAsc : -this.sortAsc;
+  }
+
+  checkedSort(a:IIdName, b: IIdName): number {
+    if (a.checked && !b.checked) {
+      return -1;
+    } else if (!a.checked && b.checked) {
+      return 1;
+    }
+
+    return 0;
+
+
   }
 
   selectedHandler = (item: IIdName): boolean => {
